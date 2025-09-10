@@ -1,34 +1,60 @@
-# Gradle files
-.gradle/
-build/
+# Python cache
+__pycache__/
+*.py[cod]
+*.so
 
-# Local configuration file (sdk path, etc)
-local.properties
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
 
-# Log/OS Files
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Logs
 *.log
+logs/
+*.out
 
-# Android Studio generated files and folders
-captures/
-.externalNativeBuild/
-.cxx/
-*.aab
-*.apk
-output-metadata.json
+# Datasets (large files)
+data/
+datasets/
+*.csv
+*.tsv
+*.zip
+*.gz
+*.h5
+*.tar
+*.tar.gz
 
-# IntelliJ
-*.iml
+# Model checkpoints & weights
+*.h5
+*.hdf5
+*.ckpt
+*.pb
+checkpoints/
+saved_models/
+
+# TensorBoard files
+*.tfevents.*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE/project files
+.vscode/
 .idea/
-misc.xml
-deploymentTargetDropDown.xml
-render.experimental.xml
+*.iml
 
-# Keystore files
-*.jks
-*.keystore
+# Python packaging
+build/
+dist/
+*.egg-info/
+.eggs/
 
-# Google Services (e.g. APIs or Firebase)
-google-services.json
-
-# Android Profiling
-*.hprof
+# Temporary files
+*.tmp
+*.swp
+*.bak
