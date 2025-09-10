@@ -1,39 +1,80 @@
 import cv2
-from keras.models import model_from_json
 import numpy as np
-# from keras_preprocessing.image import load_img
-json_file = open("facialemotionmodel.json", "r")
-model_json = json_file.read()
-json_file.close()
-model = model_from_json(model_json)
+from keras.models import model_from_json
 
-model.load_weights("facialemotionmodel.h5")
-haar_file=cv2.data.haarcascades + 'haarcascade_frontalface_default.xml'
-face_cascade=cv2.CascadeClassifier(haar_file)
+# ---------------------------
+# Load the trained model
+# ---------------------------
+with open("facialemotionmodel.json", "r") as json_file:
+    loaded_model_json = json_file.read()
 
-def extract_features(image):
-    feature = np.array(image)
-    feature = feature.reshape(1,48,48,1)
-    return feature/255.0
+emotion_model = model_from_json(loaded_model_json)
+emotion_model.load_weights("facialemotionmodel.h5")
 
-webcam=cv2.VideoCapture(0)
-labels = {0 : 'angry', 1 : 'disgust', 2 : 'fear', 3 : 'happy', 4 : 'neutral', 5 : 'sad', 6 : 'surprise'}
+# ---------------------------
+# Haar Cascade for face detection
+# ---------------------------
+face_detector = cv2.CascadeClassifier(
+    cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
+)
+
+# ---------------------------
+# Helper function to preprocess face
+# ---------------------------
+def preprocess_face(face_img):
+    face_array = np.array(face_img).reshape(1, 48, 48, 1)
+    return face_array.astype("float32") / 255.0
+
+# Emotion classes
+emotion_dict = {
+    0: "Angry",
+    1: "Disgust",
+    2: "Fear",
+    3: "Happy",
+    4: "Neutral",
+    5: "Sad",
+    6: "Surprise",
+}
+
+# ---------------------------
+# Start video capture
+# ---------------------------
+cap = cv2.VideoCapture(0)
+
 while True:
-    i,im=webcam.read()
-    gray=cv2.cvtColor(im,cv2.COLOR_BGR2GRAY)
-    faces=face_cascade.detectMultiScale(im,1.3,5)
-    try: 
-        for (p,q,r,s) in faces:
-            image = gray[q:q+s,p:p+r]
-            cv2.rectangle(im,(p,q),(p+r,q+s),(255,0,0),2)
-            image = cv2.resize(image,(48,48))
-            img = extract_features(image)
-            pred = model.predict(img)
-            prediction_label = labels[pred.argmax()]
-            # print("Predicted Output:", prediction_label)
-            # cv2.putText(im,prediction_label)
-            cv2.putText(im, '% s' %(prediction_label), (p-10, q-10),cv2.FONT_HERSHEY_COMPLEX_SMALL,2, (0,0,255))
-        cv2.imshow("Output",im)
-        cv2.waitKey(27)
-    except cv2.error:
-        pass
+    ret, frame = cap.read()
+    if not ret:
+        break
+
+    gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    faces = face_detector.detectMultiScale(gray_frame, scaleFactor=1.3, minNeighbors=5)
+
+    for (x, y, w, h) in faces:
+        roi_gray = gray_frame[y : y + h, x : x + w]
+        roi_gray = cv2.resize(roi_gray, (48, 48))
+
+        processed_face = preprocess_face(roi_gray)
+        prediction = emotion_model.predict(processed_face, verbose=0)
+        emotion_label = emotion_dict[int(np.argmax(prediction))]
+
+        # Draw rectangle and put text
+        cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
+        cv2.putText(
+            frame,
+            emotion_label,
+            (x, y - 10),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            1,
+            (0, 0, 255),
+            2,
+            cv2.LINE_AA,
+        )
+
+    cv2.imshow("Facial Emotion Recognition", frame)
+
+    # Press 'q' to exit
+    if cv2.waitKey(1) & 0xFF == ord("q"):
+        break
+
+cap.release()
+cv2.destroyAllWindows()
