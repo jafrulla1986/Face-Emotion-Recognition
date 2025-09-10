@@ -83,8 +83,8 @@ The model is trained using convolutional neural networks (CNNs) on a custom data
 
 ## 📊 Results
 
-* Training accuracy: \~XX%
-* Validation accuracy: \~XX%
+* Training accuracy: \~74%
+* Validation accuracy: \~63%
 * Final model saved in `saved_models/` (ignored in git by default).
 
 > 📌 Training logs and accuracy/loss plots are included in the notebook.
